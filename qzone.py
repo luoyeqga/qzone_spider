@@ -75,8 +75,10 @@ def get_friend_addtime(friend):
             .format(qq_number, g_tk, friend)
         , headers=headers
         , cookies=cookie_dict)
-    res_data = json.loads(res.text[len('_Callback('):-len(');')])
-    return res_data['data']['addFriendTime']
+    resq_data = json.loads(resq.text[len('_Callback('):-len(');')])
+    timeArray = time.localtime(resq_data['data']['addFriendTime'])
+    addT = time.strftime("%Y-%m-%d %H:%M:%S", timeArray)  #将得到的秒换为时间，并格式化为2016/3/11 8:30:00
+    return addT 
 
 
 # 获取好友信息
